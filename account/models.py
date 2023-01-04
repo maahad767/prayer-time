@@ -15,11 +15,12 @@ class OfficeLocation(models.Model):
 
 class User(AbstractUser):
     bsid: str = models.CharField(
-        max_length=4,
+        max_length=6,
         blank=True,
         null=True,
         validators=[bsid_validator],
         verbose_name=_("BSID"),
+        help_text=_("BSID must be valid BSID(BSXXXX)"),
     )
 
     phone: str = models.CharField(
@@ -28,6 +29,7 @@ class User(AbstractUser):
         null=True,
         validators=[phone_validator],
         verbose_name=_("Phone"),
+        help_text=_("Phone must be valid Bangladeshi phone number"),
     )
 
     office_location = models.ForeignKey(

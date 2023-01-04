@@ -1,11 +1,16 @@
 from django.forms import ValidationError
 
 
+import re
+
+
 def bsid_validator(value):
-    if len(value) != 4:
-        raise ValidationError("BSID must be 4 characters long")
+    result = re.match(r"^BS\d{4}$", value)
+    if result is None:
+        raise ValidationError("BSID must be valid BSID(BSXXXX)")
 
 
 def phone_validator(value):
-    if len(value) != 14:
-        raise ValidationError("Phone must be 14 characters long")
+    result = re.match(r"^(?:\+?88)?01?\d{9}$", value)
+    if result is None:
+        raise ValidationError("Phone must be valid Bangladeshi phone number")
